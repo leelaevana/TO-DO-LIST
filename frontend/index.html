@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Task Manager</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fa-solid fa-check-double"></i>
+                <h2>Taskify</h2>
+            </div>
+            <ul class="nav-links">
+                <li class="active" data-filter="all"><i class="fa-solid fa-house"></i> Dashboard</li>
+                <li data-filter="today"><i class="fa-solid fa-calendar-day"></i> Today's Tasks</li>
+                <li data-filter="pending"><i class="fa-solid fa-clock"></i> Pending</li>
+                <li data-filter="completed"><i class="fa-solid fa-circle-check"></i> Completed</li>
+            </ul>
+            <div class="categories-section">
+                <h3>Categories</h3>
+                <ul id="category-list">
+                    <li data-category="Personal">Personal</li>
+                    <li data-category="Work">Work</li>
+                    <li data-category="Learning">Learning</li>
+                    <li data-category="Health">Health</li>
+                    <li data-category="Shopping">Shopping</li>
+                    <li data-category="Other">Other</li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="search-bar">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="search-input" placeholder="Search tasks by title...">
+                </div>
+                <button class="btn-primary" id="open-modal-btn">
+                    <i class="fa-solid fa-plus"></i> Add New Task
+                </button>
+            </header>
+
+            <!-- Dashboard Stats -->
+            <section class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <h4 id="stat-total">0</h4>
+                        <p>Total Tasks</p>
+                    </div>
+                    <div class="stat-icon blue"><i class="fa-solid fa-list-check"></i></div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <h4 id="stat-completed">0</h4>
+                        <p>Completed</p>
+                    </div>
+                    <div class="stat-icon green"><i class="fa-solid fa-check"></i></div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <h4 id="stat-pending">0</h4>
+                        <p>Pending</p>
+                    </div>
+                    <div class="stat-icon orange"><i class="fa-solid fa-hourglass-half"></i></div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <h4 id="stat-percentage">0%</h4>
+                        <p>Completion Rate</p>
+                    </div>
+                    <div class="stat-icon purple"><i class="fa-solid fa-chart-pie"></i></div>
+                </div>
+            </section>
+
+            <!-- Task Filters & List Section -->
+            <section class="tasks-section">
+                <div class="section-header">
+                    <h2 id="section-title">All Tasks</h2>
+                    <div class="filter-dropdowns">
+                        <select id="filter-priority">
+                            <option value="">All Priorities</option>
+                            <option value="High">High</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Low">Low</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="tasks-container" class="tasks-grid">
+                    <!-- Dynamic Task Cards Will Injected Here -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Task Modal (Add / Edit) -->
+    <div class="modal" id="task-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">Create New Task</h3>
+                <button class="close-btn" id="close-modal-btn">&times;</button>
+            </div>
+            <form id="task-form">
+                <input type="hidden" id="task-id">
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" id="task-title" required placeholder="e.g., Learn FastAPI routing">
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="task-description" rows="3" placeholder="Add optional details..."></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Category</label>
+                        <select id="task-category">
+                            <option value="Personal">Personal</option>
+                            <option value="Work">Work</option>
+                            <option value="Learning">Learning</option>
+                            <option value="Health">Health</option>
+                            <option value="Shopping">Shopping</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Priority</label>
+                        <select id="task-priority">
+                            <option value="High">High</option>
+                            <option value="Medium" selected>Medium</option>
+                            <option value="Low">Low</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Due Date</label>
+                    <input type="date" id="task-due-date">
+                </div>
+                <button type="submit" class="btn-submit" id="save-task-btn">Save Task</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
